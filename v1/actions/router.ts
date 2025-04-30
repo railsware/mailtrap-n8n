@@ -1,46 +1,23 @@
+import {IExecuteFunctions, INodeExecutionData, NodeOperationError} from "n8n-workflow";
+import { MailtrapTransport } from "../transport";
 
-import { mailtrapOperations, mailtrapFields } from './description';
-import { MailtrapTransport } from './transport';
-import { IExecuteFunctions, INodeExecutionData, INodeType, INodeTypeDescription } from "n8n-workflow";
+import * as mail from './mail/Mail.resource';
 
-export class Mailtrap implements INodeType {
-  description: INodeTypeDescription = {
-    displayName: 'Mailtrap',
-    name: 'mailtrap',
-    group: ['output'],
-    icon: 'file:mailtrap.png',
-    version: 1,
-    description: 'Interact with Mailtrap API',
-    subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-    defaults: { name: 'Mailtrap' },
-    inputs: ['main'],
-    outputs: ['main'],
-    credentials: [
-      {
-        name: 'mailtrapApi',
-        required: true,
-        displayOptions: {
-          show: {
-            authentication: ['apiToken'],
-          },
-        }
-      },
-    ],
-    properties: [
-      ...mailtrapOperations,
-      ...mailtrapFields,
-    ],
-  };
+export async function router(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
+  const credentials = await this.getCredentials('mailtrapApi');
+  const transport = new MailtrapTransport(this, credentials);
 
-  async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-    const credentials = await this.getCredentials('mailtrapApi');
-    const transport = new MailtrapTransport(this, credentials);
+  const items = this.getInputData();
+  const resource = this.getNodeParameter('resource', 0);
+  const operation = this.getNodeParameter('operation', 0);
+  const accountId = this.getNodeParameter('accountId', 0) as string;
+  let data;
 
-    const operation = this.getNodeParameter('operation', 0);
-    const accountId = this.getNodeParameter('accountId', 0) as string;
-    let data;
-
-    switch (operation) {
+  try {
+    switch (resource) {
+      case 'mail':
+        data = await mail[operation].execute.call(this, items);
+        break;
       case 'sendEmail':
         data = await transport.request('POST', '/send', {
           from: {
@@ -81,8 +58,15 @@ export class Mailtrap implements INodeType {
       case 'getContactLists':
         data = await transport.request('GET', `/accounts/${accountId}/contacts/lists`);
         break;
+      default:
+        throw new NodeOperationError(
+          this.getNode(),
+          `The operation "${operation}" is not supported!`
+        )
     }
-
-    return this.prepareOutputData([{ json: data }]);
+  } catch (error) {
+    throw error;
   }
+
+  return this.prepareOutputData([{ json: data }]);
 }

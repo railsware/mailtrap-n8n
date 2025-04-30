@@ -1,4 +1,3 @@
-// src/transport.ts
 import {
   ICredentialDataDecryptedObject,
   IExecuteFunctions,
@@ -19,7 +18,7 @@ export class MailtrapTransport {
       baseURL: 'https://api.mailtrap.io/api',
       url: path,
       headers: {
-        'Api-Token': this.credentials.apiToken as string,
+        'Api-Token': this.credentials.mailtrapTokenApi as string,
         'Content-Type': 'application/json',
       },
       json: true as const,

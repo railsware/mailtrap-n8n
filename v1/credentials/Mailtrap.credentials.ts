@@ -1,12 +1,12 @@
 import { ICredentialType, INodeProperties } from 'n8n-workflow';
 
-export class MailtrapApi implements ICredentialType {
-  name = 'mailtrapApi';
-  displayName = 'Mailtrap API';
+export class Mailtrap implements ICredentialType {
+  name = 'mailtrap';
+  displayName = 'Mailtrap';
   properties: INodeProperties[] = [
     {
       displayName: 'API Token',
-      name: 'apiToken',
+      name: 'mailtrapTokenApi',
       type: 'string',
       required: true,
       typeOptions: {

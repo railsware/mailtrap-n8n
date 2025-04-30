@@ -21,6 +21,7 @@ TEST*.xml
 /storage/glide/*
 /storage/antlers-language-server/*
 /vendor
+/dist
 .env
 .env.backup
 .phpactor.json
