@@ -1,0 +1,35 @@
+{
+  "name": "n8n-nodes-maltrap",
+  "version": "0.1.0",
+  "description": "n8n node for Mailtrap integration (send email, manage contacts)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": "https://github.com/railsware/mailtrap-n8n",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src --ext .ts",
+    "test": "jest",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "n8n",
+    "n8n-node",
+    "n8n-community-node-package",
+    "mailtrap",
+    "email"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "n8n-core": "^1.88.0",
+    "n8n-workflow": "^1.87.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.0",
+    "eslint": "^9.25.1",
+    "@typescript-eslint/parser": "^8.31.0",
+    "@typescript-eslint/eslint-plugin": "^8.31.0"
+  }
+}
