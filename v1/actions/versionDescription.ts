@@ -1,4 +1,5 @@
-import { mailtrapFields } from "./properties";
+import * as mail from './mail/Mail.resource';
+import * as contact from './contact/Contact.resource';
 import {INodeTypeDescription, NodeConnectionTypes} from "n8n-workflow";
 
 export const versionDescription: INodeTypeDescription = {
@@ -25,6 +26,7 @@ export const versionDescription: INodeTypeDescription = {
     },
   ],
   properties: [
-    ...mailtrapFields,
+    ...mail.description,
+    ...contact.description,
   ],
 }
