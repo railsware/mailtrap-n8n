@@ -9,15 +9,16 @@ export const description: INodeProperties[] = [
     displayName: 'Operation',
     name: 'operation',
     type: 'options',
+				noDataExpression: true,
     options: [
       {
         name: 'Send Email',
-        value: 'sendEmail',
+        value: 'send',
         description: 'Sends an email via Mailtrap',
+								action: 'Sends an email via mailtrap',
       },
     ],
-    default: 'sendEmail',
-    description: 'Which operation to perform',
+    default: 'send',
   },
 
   ...send.description,

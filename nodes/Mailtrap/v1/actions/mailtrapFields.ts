@@ -22,7 +22,7 @@ export interface MailtrapFields extends Record<
 
 export const mailtrapFields: MailtrapFields = {
   // ---------------------------------------------------
-  //                    Multiple
+  //                  Route params
   // ---------------------------------------------------
   accountId: {
     displayName: 'Account ID',
@@ -109,6 +109,7 @@ export const mailtrapFields: MailtrapFields = {
     displayName: 'Email',
     name: 'email',
     type: 'string',
+				placeholder: 'name@email.com',
     default: '',
     required: true,
   },
@@ -126,13 +127,13 @@ export const mailtrapFields: MailtrapFields = {
     description: 'Enter List IDs you want a contact to be added to. Multiple IDs can be separated by comma. E.g. "1, 2".',
   },
   listIdsIncluded: {
-    displayName: 'Lists to include a contact',
+    displayName: 'Lists to Include a Contact',
     name: 'listIdsIncluded',
     type: 'string',
     default: '',
   },
   listIdsExcluded: {
-    displayName: 'Lists to exclude a contact',
+    displayName: 'Lists to Exclude a Contact',
     name: 'listIdsExcluded',
     type: 'string',
     default: '',

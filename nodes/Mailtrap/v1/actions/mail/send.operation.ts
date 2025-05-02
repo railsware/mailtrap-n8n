@@ -22,7 +22,7 @@ const properties: INodeProperties[] = [
 const displayOptions = {
   show: {
     resource: ['mail'],
-    operation: ['sendEmail'],
+    operation: ['send'],
   },
 };
 

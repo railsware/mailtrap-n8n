@@ -2,19 +2,30 @@ import { IExecuteFunctions, INodeExecutionData, NodeOperationError } from "n8n-w
 
 import * as mail from './mail/Mail.resource';
 import * as contact from './contact/Contact.resource';
+import {MailtrapType} from "./node.type";
+import {mailtrapFields} from "./mailtrapFields";
+
+type MailOperations = keyof typeof mail;
+type ContactOperations = keyof typeof contact;
 
 export async function router(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-  const resource = this.getNodeParameter('resource', 0);
+  const resource = this.getNodeParameter<MailtrapType>('resource', 0);
   const operation = this.getNodeParameter('operation', 0);
+
+  const mailtrapNodeData = {
+    resource,
+    operation,
+  } as MailtrapType;
+
   let data;
 
   try {
-    switch (resource) {
+    switch (mailtrapNodeData.resource) {
       case 'mail':
-        data = await mail[operation].execute.call(this);
+        data = await mail[mailtrapNodeData.operation].execute.call(this);
         break;
       case 'contact':
-        data = await contact[operation].execute.call(this);
+        data = await contact[mailtrapNodeData.operation].execute.call(this);
         break;
       default:
         throw new NodeOperationError(

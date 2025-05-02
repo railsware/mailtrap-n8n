@@ -1,5 +1,5 @@
-import {INodeTypeBaseDescription, IVersionedNodeType, VersionedNodeType} from "n8n-workflow";
-import {MailtrapV1} from "./v1/MailtrapV1.node";
+import { INodeTypeBaseDescription, IVersionedNodeType, VersionedNodeType } from "n8n-workflow";
+import { MailtrapV1 } from "./v1/MailtrapV1.node";
 
 export class Mailtrap extends VersionedNodeType {
   constructor() {
@@ -7,7 +7,7 @@ export class Mailtrap extends VersionedNodeType {
       displayName: 'Mailtrap',
       name: 'mailtrap',
       group: ['output'],
-      icon: 'file:mailtrap.png',
+      icon: 'file:mailtrap.svg',
       description: 'Interact with Mailtrap API',
       defaultVersion: 1,
     };
