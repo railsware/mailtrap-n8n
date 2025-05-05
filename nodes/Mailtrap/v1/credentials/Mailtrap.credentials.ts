@@ -15,5 +15,15 @@ export class Mailtrap implements ICredentialType {
       default: '',
       description: 'Your Mailtrap API token',
     },
+    {
+      displayName: 'OAuth2',
+      name: 'mailtrapOAuth2pi',
+      type: 'string',
+      required: true,
+      typeOptions: {
+        password: true,
+      },
+      default: '',
+    },
   ];
 }

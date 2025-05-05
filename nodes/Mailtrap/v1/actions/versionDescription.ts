@@ -9,9 +9,9 @@ export const versionDescription: INodeTypeDescription = {
   group: ['output'],
   description: 'Interact with Mailtrap API',
   version: 1,
-  subtitle: '={{$parameter["operation"]}}',
+  subtitle: '={{$parameter["resource"] + ": " + $parameter["operation"]}}',
   defaults: {
-    name: 'Mailtrap'
+    name: 'Mailtrap',
   },
   inputs: [NodeConnectionTypes.Main],
   outputs: ['main'],
@@ -21,12 +21,56 @@ export const versionDescription: INodeTypeDescription = {
       required: true,
       displayOptions: {
         show: {
-          authentication: ['mailtrapTokenApi'],
+          authentication: [
+            'apiKey',
+          ],
         },
-      }
+      },
+    },
+    {
+      name: 'mailtrapOAuth2Api',
+      required: true,
+      displayOptions: {
+        show: {
+          authentication: ['oAuth2'],
+        },
+      },
     },
   ],
   properties: [
+    {
+      displayName: 'Authentication',
+      name: 'authentication',
+      type: 'options',
+      options: [
+        {
+          name: 'API Key',
+          value: 'apiKey',
+        },
+        {
+          name: 'OAuth2',
+          value: 'oAuth2',
+        },
+      ],
+      default: 'apiKey',
+    },
+    {
+      displayName: 'Resource',
+      name: 'resource',
+      type: 'options',
+      options: [
+        {
+          name: 'Mail',
+          value: 'mail',
+        },
+        {
+          name: 'Contact',
+          value: 'contact',
+        },
+      ],
+      default: 'mail',
+    },
+
     ...mail.description,
     ...contact.description,
   ],

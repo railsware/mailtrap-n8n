@@ -117,7 +117,7 @@ export const mailtrapFields: MailtrapFields = {
     displayName: 'Fields',
     name: 'fields',
     type: 'json',
-    default: '',
+    default: '{}',
   },
   listIds: {
     displayName: 'Lists',

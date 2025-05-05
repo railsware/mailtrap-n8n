@@ -9,13 +9,20 @@ export const description: INodeProperties[] = [
     displayName: 'Operation',
     name: 'operation',
     type: 'options',
-				noDataExpression: true,
+    noDataExpression: true,
+    displayOptions: {
+      show: {
+        resource: [
+          'mail',
+        ],
+      }
+    },
     options: [
       {
         name: 'Send Email',
         value: 'send',
         description: 'Sends an email via Mailtrap',
-								action: 'Sends an email via mailtrap',
+        action: 'Send an email via mailtrap',
       },
     ],
     default: 'send',

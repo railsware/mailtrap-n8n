@@ -5,8 +5,8 @@ task('build:icons', copyIcons);
 
 function copyIcons() {
   const version = 'v' + require('./package.json').version.split('.')[0];
-  const nodeSource = path.resolve('nodes', '**', '*.{png,svg}');
-  const nodeDestination = path.resolve('dist', 'nodes');
+  const nodeSource = path.resolve('nodes', 'Mailtrap', '**', '*.{png,svg}');
+  const nodeDestination = path.resolve('dist');
 
   src(nodeSource).pipe(dest(nodeDestination));
 

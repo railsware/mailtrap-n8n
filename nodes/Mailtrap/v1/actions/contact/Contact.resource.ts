@@ -1,4 +1,4 @@
-import {INodeProperties} from "n8n-workflow";
+import { INodeProperties } from "n8n-workflow";
 import * as create from './create.operation';
 import * as update from './update.operation';
 import * as delete_ from './delete.operation';
@@ -12,30 +12,37 @@ export const description: INodeProperties[] = [
     name: 'operation',
     type: 'options',
     noDataExpression: true,
+    displayOptions: {
+      show: {
+        resource: [
+          'contact',
+        ],
+      }
+    },
     options: [
       {
         name: 'Create Contact',
         value: 'create',
         description: 'Creates a new contact',
-        action: 'Creates a new contact',
+        action: 'Create a new contact',
       },
       {
         name: 'Update Contact',
         value: 'update',
         description: 'Allows you to update Contact in Mailtrap',
-        action: 'Allows you to update contact in mailtrap',
+        action: 'Update a contact',
       },
       {
         name: 'Delete Contact',
         value: 'delete',
         description: 'Allows you to delete Contact by their email',
-        action: 'Allows you to delete contact by their email',
+        action: 'Delete a contact',
       },
       {
         name: 'Get Contact Lists',
         value: 'getLists',
         description: 'Allows you to get the list of your Lists and their IDs',
-        action: 'Allows you to get the list of your lists and their i ds',
+        action: 'Get contact lists',
       },
     ],
     default: 'create',
@@ -45,4 +52,4 @@ export const description: INodeProperties[] = [
   ...update.description,
   ...delete_.description,
   ...getList.description,
-]
+];
