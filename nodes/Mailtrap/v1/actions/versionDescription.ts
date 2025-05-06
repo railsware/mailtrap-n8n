@@ -21,18 +21,7 @@ export const versionDescription: INodeTypeDescription = {
       required: true,
       displayOptions: {
         show: {
-          authentication: [
-            'apiKey',
-          ],
-        },
-      },
-    },
-    {
-      name: 'mailtrapOAuth2Api',
-      required: true,
-      displayOptions: {
-        show: {
-          authentication: ['oAuth2'],
+          authentication: ['apiKey'],
         },
       },
     },
@@ -46,10 +35,6 @@ export const versionDescription: INodeTypeDescription = {
         {
           name: 'API Key',
           value: 'apiKey',
-        },
-        {
-          name: 'OAuth2',
-          value: 'oAuth2',
         },
       ],
       default: 'apiKey',

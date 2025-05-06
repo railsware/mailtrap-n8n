@@ -130,13 +130,13 @@ export const mailtrapFields: MailtrapFields = {
     displayName: 'Lists to Include a Contact',
     name: 'listIdsIncluded',
     type: 'string',
-    default: '',
+    default: 'Multiple IDs can be separated by comma. E.g. "1, 2".',
   },
   listIdsExcluded: {
     displayName: 'Lists to Exclude a Contact',
     name: 'listIdsExcluded',
     type: 'string',
-    default: '',
+    default: 'Multiple IDs can be separated by comma. E.g. "1, 2".',
   },
   subscribed: {
     displayName: 'Subscribed',

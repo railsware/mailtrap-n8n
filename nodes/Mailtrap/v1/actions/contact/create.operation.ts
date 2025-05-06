@@ -28,9 +28,11 @@ export async function execute(
   try {
     const accountId = this.getNodeParameter('accountId', 0) as string;
     const responseData = await transport.request('POST', `/accounts/${accountId}/contacts`, {
-      email: this.getNodeParameter('email', 0) as string,
-      fields: this.getNodeParameter('fields', 0) as string,
-      list_ids: (this.getNodeParameter('listIds', 0) as string).split(',').map((id) => id.trim()),
+      contact: {
+        email: this.getNodeParameter('email', 0) as string,
+        fields: this.getNodeParameter('fields', 0) as string,
+        list_ids: (this.getNodeParameter('listIds', 0) as string).split(',').map((id) => id.trim()),
+      },
     });
 
     data.push({ json: responseData });
