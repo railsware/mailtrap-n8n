@@ -39,7 +39,7 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/nodes/v1/credentials/Mailtrap.credentials.js"
+      "dist/nodes/v1/credentials/MailtrapTokenApi.credentials.js"
     ],
     "nodes": [
       "dist/nodes/Mailtrap.node.js",

@@ -20,7 +20,7 @@ export async function execute(
   this: IExecuteFunctions,
 ): Promise<INodeExecutionData[]> {
   const data: INodeExecutionData[] = [];
-  const transport = new MailtrapTransport(this, await this.getCredentials('mailtrap'));
+  const transport = new MailtrapTransport(this);
 
   try {
     const accountId = this.getNodeParameter('accountId', 0) as string;
@@ -31,10 +31,10 @@ export async function execute(
     const processedError = processMailtrapError(error as NodeApiError);
 
     if (this.continueOnFail()) {
-      data.push({ json: { message: processedError.message, processedError }});
-    } else {
-      throw error;
+      data.push({ json: { message: processedError.message, error: processedError }});
     }
+
+    throw error;
   }
 
   return data;

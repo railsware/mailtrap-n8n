@@ -21,7 +21,7 @@ export async function execute(
   this: IExecuteFunctions,
 ): Promise<INodeExecutionData[]> {
   const data: INodeExecutionData[] = [];
-  const transport = new MailtrapTransport(this, await this.getCredentials('mailtrap'));
+  const transport = new MailtrapTransport(this);
 
   try {
     const accountId = this.getNodeParameter('accountId', 0) as string;

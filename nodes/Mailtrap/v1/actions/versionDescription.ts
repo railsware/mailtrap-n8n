@@ -1,12 +1,12 @@
 // eslint-disable-line
+import { INodeTypeDescription, NodeConnectionTypes } from "n8n-workflow";
 import * as mail from './mail/Mail.resource';
 import * as contact from './contact/Contact.resource';
-import { INodeTypeDescription, NodeConnectionTypes } from "n8n-workflow";
 
 export const versionDescription: INodeTypeDescription = {
   displayName: 'Mailtrap',
   name: 'mailtrap',
-  group: ['output'],
+  group: ['input'],
   description: 'Interact with Mailtrap API',
   version: 1,
   subtitle: '={{$parameter["resource"] + ": " + $parameter["operation"]}}',
@@ -14,36 +14,33 @@ export const versionDescription: INodeTypeDescription = {
     name: 'Mailtrap',
   },
   inputs: [NodeConnectionTypes.Main],
-  outputs: ['main'],
+  outputs: [NodeConnectionTypes.Main],
   credentials: [
     {
-      name: 'mailtrapTokenApi',
+      name: 'MailtrapTokenApi',
+      displayName: 'Mailtrap API Token',
       required: true,
-      displayOptions: {
-        show: {
-          authentication: ['apiKey'],
-        },
-      },
     },
   ],
   properties: [
     {
       displayName: 'Authentication',
       name: 'authentication',
-      type: 'options',
+      type: 'credentials',
       options: [
         {
           name: 'API Key',
-          value: 'apiKey',
+          value: 'mailtrapTokenApi',
         },
       ],
-      default: 'apiKey',
+      default: 'mailtrapTokenApi',
+      required: true,
     },
     {
       displayName: 'Resource',
       name: 'resource',
       type: 'options',
-			noDataExpression: true,
+      noDataExpression: true,
       options: [
         {
           name: 'Mail',
@@ -60,4 +57,4 @@ export const versionDescription: INodeTypeDescription = {
     ...mail.description,
     ...contact.description,
   ],
-}
+};

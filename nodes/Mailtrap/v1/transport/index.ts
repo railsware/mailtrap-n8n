@@ -6,7 +6,7 @@ import {
 } from 'n8n-workflow';
 
 export class MailtrapTransport {
-  constructor(private thisNode: IExecuteFunctions, private credentials: ICredentialDataDecryptedObject) {}
+  constructor(private thisNode: IExecuteFunctions) {}
 
   async request(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE',
@@ -15,10 +15,10 @@ export class MailtrapTransport {
   ): Promise<any> {
     const options: IHttpRequestOptions = {
       method,
-      baseURL: 'https://api.mailtrap.io/api',
+      baseURL: '=https://{{$credentials.host}}/api',
       url: path,
       headers: {
-        'Api-Token': this.credentials.mailtrapTokenApi as string,
+        // 'Api-Token': (await this.thisNode.getCredentials('MailtrapApiToken')).apiToken as string, // set in MailtrapTokenApi.credentials.ts
         'Content-Type': 'application/json',
       },
       json: true as const,
