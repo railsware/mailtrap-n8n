@@ -21,6 +21,14 @@ export class MailtrapTokenApi implements ICredentialType {
       },
       default: '',
     },
+    {
+      displayName: 'Mailing Host',
+      name: 'mailHost',
+      type: 'string',
+      required: true,
+      hint: 'The host used to send emails. Defaults to send.api.mailtrap.io',
+      default: 'send.api.mailtrap.io',
+    },
   ];
 
   authenticate: IAuthenticateGeneric = {
@@ -28,7 +36,7 @@ export class MailtrapTokenApi implements ICredentialType {
     properties: {
       headers: {
         'Api-Token': '={{$credentials.apiToken}}',
-      }
+      },
     },
   };
 

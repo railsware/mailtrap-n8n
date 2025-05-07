@@ -35,7 +35,7 @@ export async function execute(
   const transport = new MailtrapTransport(this);
 
   try {
-    const responseData = await transport.request('POST', '/send', {
+    const responseData = await transport.sendRequest({
       from: {
         name: this.getNodeParameter('fromName', 0) as string,
         to: this.getNodeParameter('fromEmail', 0) as string,
