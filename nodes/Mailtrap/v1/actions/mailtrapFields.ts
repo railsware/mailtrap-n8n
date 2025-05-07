@@ -56,6 +56,7 @@ export const mailtrapFields: MailtrapFields = {
     name: 'fromEmail',
     type: 'string',
     default: '',
+    required: true,
     description: 'Sender E-mail',
   },
   replyToName: {
@@ -84,12 +85,16 @@ export const mailtrapFields: MailtrapFields = {
     name: 'toEmail',
     type: 'string',
     default: '',
+    required: true,
+    description: 'Receiver E-mail',
   },
   subject: {
     displayName: 'Subject',
     name: 'subject',
     type: 'string',
     default: '',
+    required: true,
+    description: 'Subject of your email',
   },
   html: {
     displayName: 'HTML',

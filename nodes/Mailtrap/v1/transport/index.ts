@@ -14,13 +14,17 @@ export class MailtrapTransport {
     body?: any,
     host?: string,
   ): Promise<any> {
+    const $credentials = await this.thisNode.getCredentials('MailtrapTokenApi');
+
     const options: IHttpRequestOptions = {
       method,
       baseURL: `https://${host || 'mailtrap.io'}/api`,
       url: path,
       headers: {
-        // 'Api-Token': (await this.thisNode.getCredentials('MailtrapApiToken')).apiToken as string, // set in MailtrapTokenApi.credentials.ts
+        'Api-Token': $credentials.apiToken as string,
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'User-Agent': 'n8n',
       },
       json: true as const,
       body: body ? body : undefined,
@@ -37,7 +41,7 @@ export class MailtrapTransport {
   }
 
   async sendRequest(
-    body?: any,
+    body: any,
   ): Promise<any> {
     const $credentials = await this.thisNode.getCredentials('MailtrapTokenApi');
 
