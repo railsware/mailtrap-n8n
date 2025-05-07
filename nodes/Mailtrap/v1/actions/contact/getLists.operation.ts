@@ -10,7 +10,7 @@ const properties: INodeProperties[] = [
 const displayOptions = {
   show: {
     resource: ['contact'],
-    operation: ['getList'],
+    operation: ['getLists'],
   },
 };
 
