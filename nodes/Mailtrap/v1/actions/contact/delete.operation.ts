@@ -26,6 +26,7 @@ export async function execute(
   try {
     const accountId = this.getNodeParameter('accountId', 0) as string;
     const idOrEmail = this.getNodeParameter('idOrEmail', 0) as string;
+
     const responseData = await transport.request('DELETE', `/accounts/${accountId}/contacts/${idOrEmail}`);
 
     data.push({ json: responseData });
@@ -33,7 +34,7 @@ export async function execute(
     const processedError = processMailtrapError(error as NodeApiError);
 
     if (this.continueOnFail()) {
-      data.push({ json: { message: processedError.message, processedError }});
+      data.push({ json: { message: processedError.message, error: processedError }});
     } else {
       throw error;
     }

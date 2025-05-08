@@ -41,7 +41,7 @@ export class MailtrapTransport {
   }
 
   async sendRequest(
-    body: any,
+    body: object,
   ): Promise<any> {
     const $credentials = await this.thisNode.getCredentials('MailtrapTokenApi');
 

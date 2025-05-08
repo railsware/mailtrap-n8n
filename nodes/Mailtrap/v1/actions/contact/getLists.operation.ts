@@ -32,9 +32,9 @@ export async function execute(
 
     if (this.continueOnFail()) {
       data.push({ json: { message: processedError.message, error: processedError }});
+    } else {
+      throw error;
     }
-
-    throw error;
   }
 
   return data;

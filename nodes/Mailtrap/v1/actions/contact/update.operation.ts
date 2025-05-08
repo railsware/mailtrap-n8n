@@ -30,13 +30,15 @@ export async function execute(
 
   try {
     const accountId = this.getNodeParameter('accountId', 0) as string;
-    const responseData = await transport.request('PUT', `/accounts/${accountId}/contacts/${this.getNodeParameter('idOrEmail', 0)}`, {
+    const idOrEmail = this.getNodeParameter('idOrEmail', 0) as string;
+
+    const responseData = await transport.request('PUT', `/accounts/${accountId}/contacts/${idOrEmail}`, {
       contact: {
         email: this.getNodeParameter('email', 0) as string,
         fields: this.getNodeParameter('fields', 0) as string,
         list_ids_included: (this.getNodeParameter('listIdsIncluded', 0) as string).split(',').map((id) => id.trim()),
         list_ids_excluded: (this.getNodeParameter('listIdsExcluded', 0) as string).split(',').map((id) => id.trim()),
-        subscribed: this.getNodeParameter('subscribed', 0) as boolean,
+        unsubscribed: this.getNodeParameter('unsubscribed', 0) as boolean,
       },
     });
 
@@ -45,7 +47,7 @@ export async function execute(
     const processedError = processMailtrapError(error as NodeApiError);
 
     if (this.continueOnFail()) {
-      data.push({ json: { message: processedError.message, processedError }});
+      data.push({ json: { message: processedError.message, error: processedError }});
     } else {
       throw error;
     }

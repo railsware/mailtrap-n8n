@@ -31,6 +31,8 @@ export const mailtrapFields: MailtrapFields = {
     default: '',
     required: true,
     description: 'Unique account ID',
+    placeholder: 'e.g. 2334',
+
   },
   idOrEmail: {
     displayName: 'ID or Email',
@@ -39,6 +41,7 @@ export const mailtrapFields: MailtrapFields = {
     default: '',
     required: true,
     description: 'Contact ID or email',
+    placeholder: 'e.g. 2454 or hello@example.com',
   },
 
   // ---------------------------------------------------
@@ -50,6 +53,7 @@ export const mailtrapFields: MailtrapFields = {
     type: 'string',
     default: '',
     description: 'Sender name',
+    placeholder: 'e.g. John Doe',
   },
   fromEmail: {
     displayName: 'From Email',
@@ -58,6 +62,7 @@ export const mailtrapFields: MailtrapFields = {
     default: '',
     required: true,
     description: 'Sender E-mail',
+    placeholder: 'e.g. john.doe@mail.com',
   },
   replyToName: {
     displayName: 'Reply-to Name',
@@ -65,6 +70,7 @@ export const mailtrapFields: MailtrapFields = {
     type: 'string',
     default: '',
     description: 'Name of a receiver to reply to',
+    placeholder: 'e.g. John Doe',
   },
   replyToEmail: {
     displayName: 'Reply-to Email',
@@ -72,6 +78,7 @@ export const mailtrapFields: MailtrapFields = {
     type: 'string',
     default: '',
     description: 'E-mail of a receiver to reply to',
+    placeholder: 'e.g. john.doe@mail.com',
   },
   toName: {
     displayName: 'To Name',
@@ -79,6 +86,7 @@ export const mailtrapFields: MailtrapFields = {
     type: 'string',
     default: '',
     description: 'Receiver name',
+    placeholder: 'e.g. John Doe',
   },
   toEmail: {
     displayName: 'To Email',
@@ -87,6 +95,7 @@ export const mailtrapFields: MailtrapFields = {
     default: '',
     required: true,
     description: 'Receiver E-mail',
+    placeholder: 'e.g. john.doe@mail.com',
   },
   subject: {
     displayName: 'Subject',
@@ -95,6 +104,7 @@ export const mailtrapFields: MailtrapFields = {
     default: '',
     required: true,
     description: 'Subject of your email',
+    placeholder: 'e.g. Hello',
   },
   html: {
     displayName: 'HTML',
@@ -114,7 +124,7 @@ export const mailtrapFields: MailtrapFields = {
     displayName: 'Email',
     name: 'email',
     type: 'string',
-				placeholder: 'name@email.com',
+    placeholder: 'name@email.com',
     default: '',
     required: true,
   },
@@ -129,23 +139,31 @@ export const mailtrapFields: MailtrapFields = {
     name: 'listIds',
     type: 'string',
     default: '',
-    description: 'Enter List IDs you want a contact to be added to. Multiple IDs can be separated by comma. E.g. "1, 2".',
+    placeholder: 'e.g. 1, 2, 3',
+    description: 'Enter List IDs you want a contact to be added to',
+    hint: 'Multiple IDs can be separated by comma. E.g. "1, 2".',
   },
   listIdsIncluded: {
     displayName: 'Lists to Include a Contact',
     name: 'listIdsIncluded',
     type: 'string',
-    default: 'Multiple IDs can be separated by comma. E.g. "1, 2".',
+    default: '',
+    description: 'Enter List IDs you want a contact to be included in',
+    placeholder: 'e.g. 1, 2, 3',
+    hint: 'Multiple IDs can be separated by comma. E.g. "1, 2".',
   },
   listIdsExcluded: {
     displayName: 'Lists to Exclude a Contact',
     name: 'listIdsExcluded',
     type: 'string',
-    default: 'Multiple IDs can be separated by comma. E.g. "1, 2".',
+    default: '',
+    description: 'Enter List IDs you want a contact to be excluded from',
+    placeholder: 'e.g. 1, 2, 3',
+    hint: 'Multiple IDs can be separated by comma. E.g. "1, 2".',
   },
   subscribed: {
-    displayName: 'Subscribed',
-    name: 'subscribed',
+    displayName: 'Unsubscribed?',
+    name: 'unsubscribed',
     type: 'boolean',
     default: false,
   },

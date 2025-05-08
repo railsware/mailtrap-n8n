@@ -1,4 +1,4 @@
-import {AllEntities} from "n8n-workflow";
+import { AllEntities } from "n8n-workflow";
 
 type NodeType = {
   mail: 'send',

@@ -1,4 +1,5 @@
 import {
+  IDataObject,
   IExecuteFunctions,
   INodeExecutionData,
   INodeProperties, NodeApiError,
@@ -35,7 +36,7 @@ export async function execute(
   const transport = new MailtrapTransport(this);
 
   try {
-    const sendOptions: {[p: string]: any} = {
+    const sendOptions: IDataObject = {
       from: {
         name: this.getNodeParameter('fromName', 0) as string,
         email: this.getNodeParameter('fromEmail', 0) as string,
@@ -62,7 +63,7 @@ export async function execute(
     const processedError = processMailtrapError(error as NodeApiError);
 
     if (this.continueOnFail()) {
-      data.push({ json: { message: processedError.message, processedError }});
+      data.push({ json: { message: processedError.message, error: processedError }});
     } else {
       throw error;
     }

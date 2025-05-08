@@ -1,5 +1,5 @@
 // eslint-disable-line
-import { INodeTypeDescription, NodeConnectionTypes } from "n8n-workflow";
+import { INodeTypeDescription } from "n8n-workflow";
 import * as mail from './mail/Mail.resource';
 import * as contact from './contact/Contact.resource';
 
@@ -13,8 +13,8 @@ export const versionDescription: INodeTypeDescription = {
   defaults: {
     name: 'Mailtrap',
   },
-  inputs: [NodeConnectionTypes.Main],
-  outputs: [NodeConnectionTypes.Main],
+  inputs: ['main'],
+  outputs: ['main'],
   credentials: [
     {
       name: 'MailtrapTokenApi',

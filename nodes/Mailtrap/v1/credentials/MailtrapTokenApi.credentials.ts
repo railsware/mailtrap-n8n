@@ -42,7 +42,7 @@ export class MailtrapTokenApi implements ICredentialType {
 
   test: ICredentialTestRequest = {
     request: {
-      baseURL: '=https://mailtrap.io/api',
+      baseURL: 'https://mailtrap.io/api',
       url: '/accounts',
     }
   };

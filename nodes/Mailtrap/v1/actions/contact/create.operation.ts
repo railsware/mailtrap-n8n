@@ -1,4 +1,10 @@
-import { IExecuteFunctions, INodeExecutionData, INodeProperties, NodeApiError, updateDisplayOptions } from "n8n-workflow";
+import {
+  IExecuteFunctions,
+  INodeExecutionData,
+  INodeProperties,
+  NodeApiError,
+  updateDisplayOptions,
+} from "n8n-workflow";
 import { MailtrapTransport } from "../../transport";
 import { processMailtrapError } from "../../helpers/utils";
 import { mailtrapFields } from "../mailtrapFields";
@@ -40,7 +46,7 @@ export async function execute(
     const processedError = processMailtrapError(error as NodeApiError);
 
     if (this.continueOnFail()) {
-      data.push({ json: { message: processedError.message, processedError }});
+      data.push({ json: { message: processedError.message, error: processedError }});
     } else {
       throw error;
     }
