@@ -21,7 +21,7 @@ export const versionDescription: INodeTypeDescription = {
       required: true,
       displayOptions: {
         show: {
-          authentication: ['mailtrapTokenApi'],
+          authentication: ['apiToken'],
         }
       }
     },
@@ -30,7 +30,7 @@ export const versionDescription: INodeTypeDescription = {
       required: true,
       displayOptions: {
         show: {
-          authentication: ['mailtrapBearerTokenApi'],
+          authentication: ['bearerToken'],
         }
       }
     }
@@ -42,15 +42,15 @@ export const versionDescription: INodeTypeDescription = {
       type: 'options',
       options: [
         {
-          name: 'API Key',
-          value: 'mailtrapTokenApi',
+          name: 'API Token',
+          value: 'apiToken',
         },
         {
           name: 'Bearer Token',
-          value: 'mailtrapBearerTokenApi',
+          value: 'bearerToken',
         },
       ],
-      default: 'mailtrapTokenApi',
+      default: 'apiToken',
       required: true,
     },
     {

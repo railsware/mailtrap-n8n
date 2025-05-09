@@ -29,10 +29,10 @@ export async function router(this: IExecuteFunctions): Promise<INodeExecutionDat
     try {
       switch (mailtrapNodeData.resource) {
         case 'mail':
-          responseData = await mail[mailtrapNodeData.operation].execute.call(this);
+          responseData = await mail[mailtrapNodeData.operation].execute.call(this, i);
           break;
         case 'contact':
-          responseData = await contact[mailtrapNodeData.operation].execute.call(this);
+          responseData = await contact[mailtrapNodeData.operation].execute.call(this, i);
           break;
         default:
           throw new NodeOperationError(
@@ -50,9 +50,9 @@ export async function router(this: IExecuteFunctions): Promise<INodeExecutionDat
 
       data.push(...executionData);
 
-      if (items.length > 1 || i < items.length - 1) {
+      if (i < items.length - 1) {
         // Mailtrap rate limit
-        await sleep(200);
+        await sleep(400);
       }
     } catch (error) {
       const processedError = processMailtrapError(error as NodeApiError, i);
@@ -63,6 +63,7 @@ export async function router(this: IExecuteFunctions): Promise<INodeExecutionDat
       }
 
       throw new NodeOperationError(this.getNode(), error as Error, {
+        message: processedError.message,
         description: processedError.description ?? '',
         itemIndex: i,
       });

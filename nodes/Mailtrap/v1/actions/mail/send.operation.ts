@@ -30,33 +30,34 @@ export const description = updateDisplayOptions(displayOptions, properties);
 
 export async function execute(
   this: IExecuteFunctions,
+  item: number = 0,
 ): Promise<INodeExecutionData[]> {
   const data: INodeExecutionData[] = [];
   const transport = new MailtrapTransport(this);
 
   const sendOptions: IDataObject = {
     from: {
-      name: this.getNodeParameter('fromName', 0) as string,
-      email: this.getNodeParameter('fromEmail', 0) as string,
+      name: this.getNodeParameter('fromName', item) as string,
+      email: this.getNodeParameter('fromEmail', item) as string,
     },
     to: [{
-      name: this.getNodeParameter('toName', 0) as string,
-      email: this.getNodeParameter('toEmail', 0) as string,
+      name: this.getNodeParameter('toName', item) as string,
+      email: this.getNodeParameter('toEmail', item) as string,
     }],
-    subject: this.getNodeParameter('subject', 0) as string,
-    html: this.getNodeParameter('html', 0) as string,
+    subject: this.getNodeParameter('subject', item) as string,
+    html: this.getNodeParameter('html', item) as string,
   };
 
-  if (this.getNodeParameter('replyToEmail', 0)) {
+  if (this.getNodeParameter('replyToEmail', item)) {
     sendOptions.reply_to = {
-      name: this.getNodeParameter('replyToName', 0) as string,
-      email: this.getNodeParameter('replyToEmail', 0) as string,
+      name: this.getNodeParameter('replyToName', item) as string,
+      email: this.getNodeParameter('replyToEmail', item) as string,
     };
   }
 
   const responseData = await transport.sendRequest(sendOptions);
 
-  data.push({ json: responseData });
+  data.push({ json: responseData, pairedItem: { item } });
 
   return data;
 }

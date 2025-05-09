@@ -128,7 +128,7 @@ export const mailtrapFields: MailtrapFields = {
     required: true,
   },
   fields: {
-    displayName: 'Fields',
+    displayName: 'Fields (JSON)',
     name: 'fields',
     type: 'json',
     default: '{}',

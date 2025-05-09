@@ -23,16 +23,17 @@ export const description = updateDisplayOptions(displayOptions, properties);
 
 export async function execute(
   this: IExecuteFunctions,
+  item: number = 0,
 ): Promise<INodeExecutionData[]> {
   const data: INodeExecutionData[] = [];
   const transport = new MailtrapTransport(this);
 
-  const accountId = this.getNodeParameter('accountId', 0) as string;
-  const idOrEmail = this.getNodeParameter('idOrEmail', 0) as string;
+  const accountId = this.getNodeParameter('accountId', item) as string;
+  const idOrEmail = this.getNodeParameter('idOrEmail', item) as string;
 
   const responseData = await transport.request('DELETE', `/accounts/${accountId}/contacts/${idOrEmail}`);
 
-  data.push({ json: responseData });
+  data.push({ json: responseData, pairedItem: { item } });
 
   return data;
 }

@@ -4,11 +4,12 @@ import {
   IHttpRequestOptions,
   ILoadOptionsFunctions,
   IPollFunctions,
+  JsonObject,
   NodeApiError
 } from 'n8n-workflow';
 
 export class MailtrapTransport {
-  constructor(private thisNode: IExecuteFunctions | ILoadOptionsFunctions | IPollFunctions) {}
+  constructor(private node: IExecuteFunctions | ILoadOptionsFunctions | IPollFunctions) {}
 
   /**
    * @param method
@@ -36,22 +37,16 @@ export class MailtrapTransport {
       body: Object.keys(body).length ? body : undefined,
     };
 
-    let credentialType = 'MailtrapTokenApi';
-    const authenticationMethod = this.thisNode.getNodeParameter('authentication', 0) as string;
-    if (authenticationMethod === 'mailtrapBearerTokenApi') {
-      credentialType = 'MailtrapBearerTokenApi';
-    }
-
     try {
-      return await this.thisNode.helpers.httpRequestWithAuthentication.call(
-        this.thisNode,
-        credentialType,
+      return await this.node.helpers.requestWithAuthentication.call(
+        this.node,
+        this.getCredentialType(),
         options,
       );
     } catch (error) {
       throw new NodeApiError(
-        this.thisNode.getNode(),
-        error as any,
+        this.node.getNode(),
+        error as JsonObject,
       );
     }
   }
@@ -59,7 +54,7 @@ export class MailtrapTransport {
   async sendRequest(
     body: IDataObject,
   ): Promise<any> {
-    const $credentials = await this.thisNode.getCredentials('MailtrapTokenApi');
+    const $credentials = await this.node.getCredentials(this.getCredentialType());
 
     return this.request(
       'POST',
@@ -67,5 +62,18 @@ export class MailtrapTransport {
       body,
       $credentials.mailHost as string || 'send.api.mailtrap.io',
     );
+  }
+
+  private getCredentialType(): 'MailtrapTokenApi' | 'MailtrapBearerTokenApi' {
+    const authenticationMethod = this.node.getNodeParameter('authentication', 0) as string;
+
+    switch (authenticationMethod) {
+      case 'apiToken':
+        return 'MailtrapTokenApi';
+      case 'bearerToken':
+        return 'MailtrapBearerTokenApi';
+      default:
+        throw new Error(`The authentication method "${authenticationMethod}" is not supported!`);
+    }
   }
 }

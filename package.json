@@ -9,6 +9,7 @@
     "url": "https://github.com/railsware/mailtrap-n8n"
   },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "build": "tsc && gulp build:icons",
     "dev": "tsc --watch",
     "format": "prettier nodes --write",
