@@ -2,11 +2,10 @@ import {
   IDataObject,
   IExecuteFunctions,
   INodeExecutionData,
-  INodeProperties, NodeApiError,
+  INodeProperties,
   updateDisplayOptions,
 } from "n8n-workflow";
 import { MailtrapTransport } from "../../transport";
-import { processMailtrapError } from "../../helpers/utils";
 import { mailtrapFields } from "../mailtrapFields";
 
 const properties: INodeProperties[] = [
@@ -35,39 +34,29 @@ export async function execute(
   const data: INodeExecutionData[] = [];
   const transport = new MailtrapTransport(this);
 
-  try {
-    const sendOptions: IDataObject = {
-      from: {
-        name: this.getNodeParameter('fromName', 0) as string,
-        email: this.getNodeParameter('fromEmail', 0) as string,
-      },
-      to: [{
-        name: this.getNodeParameter('toName', 0) as string,
-        email: this.getNodeParameter('toEmail', 0) as string,
-      }],
-      subject: this.getNodeParameter('subject', 0) as string,
-      html: this.getNodeParameter('html', 0) as string,
+  const sendOptions: IDataObject = {
+    from: {
+      name: this.getNodeParameter('fromName', 0) as string,
+      email: this.getNodeParameter('fromEmail', 0) as string,
+    },
+    to: [{
+      name: this.getNodeParameter('toName', 0) as string,
+      email: this.getNodeParameter('toEmail', 0) as string,
+    }],
+    subject: this.getNodeParameter('subject', 0) as string,
+    html: this.getNodeParameter('html', 0) as string,
+  };
+
+  if (this.getNodeParameter('replyToEmail', 0)) {
+    sendOptions.reply_to = {
+      name: this.getNodeParameter('replyToName', 0) as string,
+      email: this.getNodeParameter('replyToEmail', 0) as string,
     };
-
-    if (this.getNodeParameter('replyToEmail', 0)) {
-      sendOptions.reply_to = {
-        name: this.getNodeParameter('replyToName', 0) as string,
-        email: this.getNodeParameter('replyToEmail', 0) as string,
-      };
-    }
-
-    const responseData = await transport.sendRequest(sendOptions);
-
-    data.push({ json: responseData });
-  } catch (error) {
-    const processedError = processMailtrapError(error as NodeApiError);
-
-    if (this.continueOnFail()) {
-      data.push({ json: { message: processedError.message, error: processedError }});
-    } else {
-      throw error;
-    }
   }
+
+  const responseData = await transport.sendRequest(sendOptions);
+
+  data.push({ json: responseData });
 
   return data;
 }

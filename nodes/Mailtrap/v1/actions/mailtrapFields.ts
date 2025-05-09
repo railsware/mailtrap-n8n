@@ -30,12 +30,11 @@ export const mailtrapFields: MailtrapFields = {
     type: 'string',
     default: '',
     required: true,
-    description: 'Unique account ID',
+    description: 'Choose an email from the list, or specify a ID using an expression',
     placeholder: 'e.g. 2334',
-
   },
   idOrEmail: {
-    displayName: 'ID or Email',
+    displayName: 'Contact ID or Email',
     name: 'idOrEmail',
     type: 'string',
     default: '',
@@ -135,7 +134,7 @@ export const mailtrapFields: MailtrapFields = {
     default: '{}',
   },
   listIds: {
-    displayName: 'Lists',
+    displayName: 'List IDs',
     name: 'listIds',
     type: 'string',
     default: '',
@@ -144,7 +143,7 @@ export const mailtrapFields: MailtrapFields = {
     hint: 'Multiple IDs can be separated by comma. E.g. "1, 2".',
   },
   listIdsIncluded: {
-    displayName: 'Lists to Include a Contact',
+    displayName: 'List IDs to Include a Contact',
     name: 'listIdsIncluded',
     type: 'string',
     default: '',
@@ -153,7 +152,7 @@ export const mailtrapFields: MailtrapFields = {
     hint: 'Multiple IDs can be separated by comma. E.g. "1, 2".',
   },
   listIdsExcluded: {
-    displayName: 'Lists to Exclude a Contact',
+    displayName: 'Lists IDs to Exclude a Contact',
     name: 'listIdsExcluded',
     type: 'string',
     default: '',

@@ -1,13 +1,21 @@
 import {
-  ICredentialDataDecryptedObject,
   IExecuteFunctions,
   IHttpRequestOptions,
+  ILoadOptionsFunctions,
+  IPollFunctions,
   NodeApiError
 } from 'n8n-workflow';
 
 export class MailtrapTransport {
-  constructor(private thisNode: IExecuteFunctions) {}
+  constructor(private thisNode: IExecuteFunctions | ILoadOptionsFunctions | IPollFunctions) {}
 
+  /**
+   * @param method
+   * @param path
+   * @param body
+   * @param host
+   * @throws NodeApiError
+   */
   async request(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE',
     path: string,
