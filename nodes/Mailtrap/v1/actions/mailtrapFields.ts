@@ -16,7 +16,8 @@ export interface MailtrapFields extends Record<
   | "listIds"
   | "listIdsIncluded"
   | "listIdsExcluded"
-  | "subscribed",
+  | "subscribed"
+  | "mailingHost",
   INodeProperties
 >{}
 
@@ -39,7 +40,6 @@ export const mailtrapFields: MailtrapFields = {
     type: 'string',
     default: '',
     required: true,
-    description: 'Contact ID or email',
     placeholder: 'e.g. 2454 or hello@example.com',
   },
 
@@ -165,5 +165,18 @@ export const mailtrapFields: MailtrapFields = {
     name: 'unsubscribed',
     type: 'boolean',
     default: false,
+  },
+
+  // ---------------------------------------------------
+  //                  Credentials
+  // ---------------------------------------------------
+  mailingHost: {
+    displayName: 'Mailing Host',
+    name: 'mailHost',
+    type: 'string',
+    required: true,
+    description: 'The host used to send emails',
+    hint: 'Defaults to send.api.mailtrap.io',
+    default: 'send.api.mailtrap.io',
   },
 };

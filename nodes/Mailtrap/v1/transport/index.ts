@@ -1,4 +1,5 @@
 import {
+  IDataObject,
   IExecuteFunctions,
   IHttpRequestOptions,
   ILoadOptionsFunctions,
@@ -11,35 +12,42 @@ export class MailtrapTransport {
 
   /**
    * @param method
-   * @param path
+   * @param endpoint
    * @param body
    * @param host
    * @throws NodeApiError
    */
   async request(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE',
-    path: string,
-    body?: any,
+    endpoint: string,
+    body: IDataObject = {},
     host?: string,
   ): Promise<any> {
-    const $credentials = await this.thisNode.getCredentials('MailtrapTokenApi');
-
     const options: IHttpRequestOptions = {
       method,
       baseURL: `https://${host || 'mailtrap.io'}/api`,
-      url: path,
+      url: endpoint,
       headers: {
-        'Api-Token': $credentials.apiToken as string,
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'User-Agent': 'n8n',
       },
       json: true as const,
-      body: body ? body : undefined,
+      body: Object.keys(body).length ? body : undefined,
     };
 
+    let credentialType = 'MailtrapTokenApi';
+    const authenticationMethod = this.thisNode.getNodeParameter('authentication', 0) as string;
+    if (authenticationMethod === 'mailtrapBearerTokenApi') {
+      credentialType = 'MailtrapBearerTokenApi';
+    }
+
     try {
-      return await this.thisNode.helpers.httpRequest(options);
+      return await this.thisNode.helpers.httpRequestWithAuthentication.call(
+        this.thisNode,
+        credentialType,
+        options,
+      );
     } catch (error) {
       throw new NodeApiError(
         this.thisNode.getNode(),
@@ -49,7 +57,7 @@ export class MailtrapTransport {
   }
 
   async sendRequest(
-    body: object,
+    body: IDataObject,
   ): Promise<any> {
     const $credentials = await this.thisNode.getCredentials('MailtrapTokenApi');
 

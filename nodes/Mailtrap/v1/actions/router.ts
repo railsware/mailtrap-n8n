@@ -1,8 +1,10 @@
 import {
   IDataObject,
   IExecuteFunctions,
-  INodeExecutionData, NodeApiError,
+  INodeExecutionData,
+  NodeApiError,
   NodeOperationError,
+  sleep,
 } from "n8n-workflow";
 
 import * as mail from './mail/Mail.resource';
@@ -47,6 +49,11 @@ export async function router(this: IExecuteFunctions): Promise<INodeExecutionDat
       );
 
       data.push(...executionData);
+
+      if (items.length > 1 || i < items.length - 1) {
+        // Mailtrap rate limit
+        await sleep(200);
+      }
     } catch (error) {
       const processedError = processMailtrapError(error as NodeApiError, i);
 

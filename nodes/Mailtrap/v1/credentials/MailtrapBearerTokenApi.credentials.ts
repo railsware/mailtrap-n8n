@@ -6,22 +6,23 @@ import {
 } from 'n8n-workflow';
 import { mailtrapFields } from "../actions/mailtrapFields";
 
-export class MailtrapTokenApi implements ICredentialType {
-  name = 'MailtrapTokenApi';
-  displayName = 'Mailtrap API Token';
+export class MailtrapBearerTokenApi implements ICredentialType {
+  name = 'MailtrapBearerTokenApi';
+  displayName = 'Mailtrap Bearer Token';
   documentationUrl = '';
 
   properties: INodeProperties[] = [
     {
-      displayName: 'API Token',
-      name: 'apiToken',
+      displayName: 'Bearer Token',
+      name: 'bearerToken',
       type: 'string',
       required: true,
       typeOptions: {
         password: true,
       },
-      placeholder: '123456',
-      description: 'The API token used to authenticate with Mailtrap',
+      placeholder: 'Bearer 123456',
+      description: 'The bearer token used to authenticate with Mailtrap',
+      hint: 'The "Bearer " prefix is optional',
       default: '',
     },
     mailtrapFields.mailingHost,
@@ -31,7 +32,7 @@ export class MailtrapTokenApi implements ICredentialType {
     type: 'generic',
     properties: {
       headers: {
-        'Api-Token': '={{$credentials.apiToken}}',
+        'Authorization': '={{$credentials.bearerToken.trim().toLowerCase().startsWith("bearer") ? $credentials.bearerToken.trim() : "Bearer " + $credentials.bearerToken.trim()}}',
       },
     },
   };
