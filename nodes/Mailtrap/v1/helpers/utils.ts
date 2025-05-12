@@ -14,7 +14,7 @@ export function processMailtrapError(error: NodeApiError, itemIndex?: number) {
           ([key, description]: any) => ({ key, name: description.displayName })
         );
 
-      error.description = Object.entries(errorPayload.errors)
+      error.message = Object.entries(errorPayload.errors)
         .map(
           ([key, message]: any) => {
             const fieldName = fieldMap.find((field) => field.key === key)?.name;
@@ -24,7 +24,7 @@ export function processMailtrapError(error: NodeApiError, itemIndex?: number) {
         )
         .join('\n');
     } else if (Object.keys(errorPayload).includes('error')) {
-      error.description = errorPayload.error;
+      error.message = errorPayload.error;
     }
   }
   error.description = error.description || error.message;
