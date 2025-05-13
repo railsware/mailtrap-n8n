@@ -4,8 +4,13 @@ import { mailtrapFields } from "../actions/mailtrapFields";
 
 export function processMailtrapError(error: NodeApiError, itemIndex?: number) {
   // update error.description and message...
+  let errorPayload: any;
 
-  const errorPayload = JSON.parse((error.description as string)?.slice(5)); // example error.description from http response: "422 - JSON"
+  try {
+    errorPayload = JSON.parse((error.description as string)?.slice(5)); // example error.description from http response: "422 - JSON"
+  } catch (_) {
+    errorPayload = false;
+  }
 
   if (errorPayload) {
     if (Object.keys(errorPayload).includes('errors')) {

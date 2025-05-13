@@ -10,7 +10,10 @@ import { mailtrapFields } from "../mailtrapFields";
 
 const properties: INodeProperties[] = [
   mailtrapFields.accountId,
-  mailtrapFields.email,
+  {
+    ...mailtrapFields.email,
+    required: true,
+  },
   mailtrapFields.fields,
   mailtrapFields.listIds,
 ];
