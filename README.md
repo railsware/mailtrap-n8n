@@ -21,7 +21,12 @@ Go to `~/.n8n/custom` (Linux, Mac), and link it there
   cd ~/.n8n/custom
 ```
 ```bash
-  npm link n8n-nodes-mailtrap
+  pnpm link n8n-nodes-mailtrap
+```
+OR create the folder manually:
+```bash
+  mkdir ~/.n8n/custom
+  cd ~/.n8n/custom
 ```
 
 After that, you can start the local hosted n8n instance:
