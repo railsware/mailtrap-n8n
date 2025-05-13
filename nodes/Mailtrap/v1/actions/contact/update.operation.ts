@@ -37,7 +37,7 @@ export async function execute(
   const accountId = this.getNodeParameter('accountId', item) as string;
   const idOrEmail = this.getNodeParameter('idOrEmail', item) as string;
 
-  const responseData = await transport.request('PUT', `/accounts/${accountId}/contacts/${idOrEmail}`, {
+  const responseData = await transport.request('PATCH', `/accounts/${accountId}/contacts/${idOrEmail}`, {
     contact: {
       email: this.getNodeParameter('email', item) as string,
       fields: JSON.parse(this.getNodeParameter('fields', item) as string),

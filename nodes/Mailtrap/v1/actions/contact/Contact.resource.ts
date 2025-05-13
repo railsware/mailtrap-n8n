@@ -29,19 +29,19 @@ export const description: INodeProperties[] = [
       {
         name: 'Update Contact',
         value: 'update',
-        description: 'Allows you to update Contact in Mailtrap',
+        description: 'Update a Contact',
         action: 'Update a contact',
       },
       {
         name: 'Delete Contact',
-        value: 'delete',
-        description: 'Allows you to delete Contact by their email',
+        value: 'delete_',
+        description: 'Delete a Contact by their email',
         action: 'Delete a contact',
       },
       {
         name: 'Get Contact Lists',
         value: 'getLists',
-        description: 'Allows you to get the list of your Lists and their IDs',
+        description: 'Allows you to get the list of your Contact Lists',
         action: 'Get contact lists',
       },
     ],

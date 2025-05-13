@@ -19,7 +19,7 @@ export class MailtrapTransport {
    * @throws NodeApiError
    */
   async request(
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE',
+    method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE',
     endpoint: string,
     body: IDataObject = {},
     host?: string,

@@ -15,7 +15,7 @@ const properties: INodeProperties[] = [
 const displayOptions = {
   show: {
     resource: ['contact'],
-    operation: ['delete'],
+    operation: ['delete_'],
   },
 };
 
@@ -33,7 +33,7 @@ export async function execute(
 
   const responseData = await transport.request('DELETE', `/accounts/${accountId}/contacts/${idOrEmail}`);
 
-  data.push({ json: responseData, pairedItem: { item } });
+  data.push({ json: { deleted: true }, pairedItem: { item } });
 
   return data;
 }

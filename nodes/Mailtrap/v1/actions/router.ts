@@ -10,7 +10,7 @@ import {
 import * as mail from './mail/Mail.resource';
 import * as contact from './contact/Contact.resource';
 import { MailtrapType } from "./node.type";
-import {processMailtrapError} from "../helpers/utils";
+import { processMailtrapError } from "../helpers/utils";
 
 export async function router(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
   const items = this.getInputData();
