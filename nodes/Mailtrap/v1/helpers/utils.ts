@@ -21,7 +21,7 @@ export function processMailtrapError(error: NodeApiError, itemIndex?: number) {
     }
   }
 
-  const getSolution = () => {
+  const getSolution = (): string => {
     if (error.description?.includes('422')) {
       return 'Please verify the input data format and required fields. Check if all required parameters are provided and valid.';
     } else if (error.description?.includes('404')) {
