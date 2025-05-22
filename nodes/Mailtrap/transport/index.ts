@@ -5,7 +5,7 @@ import {
   ILoadOptionsFunctions,
   IPollFunctions,
   JsonObject,
-  NodeApiError
+  NodeApiError,
 } from 'n8n-workflow';
 
 export class MailtrapTransport {

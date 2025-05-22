@@ -12,6 +12,9 @@ importers:
         specifier: '*'
         version: 1.89.0
     devDependencies:
+      '@types/lodash':
+        specifier: ^4.17.16
+        version: 4.17.17
       '@typescript-eslint/parser':
         specifier: ~8.32.0
         version: 8.32.1(eslint@8.57.1)(typescript@5.8.3)
@@ -96,6 +99,9 @@ packages:
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+
+  '@types/lodash@4.17.17':
+    resolution: {integrity: sha512-RRVJ+J3J+WmyOTqnz3PiBLA501eKwXl2noseKOrNo/6+XEHjTAxO4xHvxQB6QuNm+s4WRbn6rSiap8+EA+ykFQ==}
 
   '@types/semver@7.7.0':
     resolution: {integrity: sha512-k107IF4+Xr7UHjwDc7Cfd6PRQfbdkiRabXGRjo07b4WyPahFBZCZ1sE+BNxYIJPPg73UkfOsVOLwqVc/6ETrIA==}
@@ -1510,6 +1516,8 @@ snapshots:
       fastq: 1.19.1
 
   '@types/json-schema@7.0.15': {}
+
+  '@types/lodash@4.17.17': {}
 
   '@types/semver@7.7.0': {}
 
