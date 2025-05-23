@@ -1,24 +1,32 @@
-import { INodeTypeBaseDescription, IVersionedNodeType, VersionedNodeType } from "n8n-workflow";
-import { MailtrapV1 } from "./v1/MailtrapV1.node";
+import {
+  IExecuteFunctions, INodeExecutionData,
+  INodeType,
+  INodeTypeDescription,
+} from "n8n-workflow";
+import { getAccounts } from "./methods/loadOptions";
+import { description } from "./actions/description";
+import { router } from "./actions/router";
 
-export class Mailtrap extends VersionedNodeType {
+export class Mailtrap implements INodeType {
+  description: INodeTypeDescription;
+  methods = {
+    loadOptions: {
+      getAccounts,
+    },
+  };
+
+  async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
+    return await router.call(this);
+  }
   constructor() {
-    const baseDescription: INodeTypeBaseDescription = {
-      displayName: 'Mailtrap',
-      name: 'mailtrap',
-      group: ['output'],
+    this.description = {
       icon: {
         light: 'file:mailtrap.svg',
         dark: 'file:mailtrap.dark.svg',
       },
-      description: 'Interact with Mailtrap API',
       defaultVersion: 1,
+      usableAsTool: true,
+      ...description,
     };
-
-    const nodeVersions: IVersionedNodeType['nodeVersions'] = {
-      1: new MailtrapV1(baseDescription),
-    };
-
-    super(nodeVersions, baseDescription);
   }
 }

@@ -3,7 +3,7 @@ import { INodeTypeDescription } from "n8n-workflow";
 import * as mail from './mail/Mail.resource';
 import * as contact from './contact/Contact.resource';
 
-export const versionDescription: INodeTypeDescription = {
+export const description: INodeTypeDescription = {
   displayName: 'Mailtrap',
   name: 'mailtrap',
   group: ['input'],

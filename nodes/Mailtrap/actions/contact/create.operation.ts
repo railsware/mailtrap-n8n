@@ -9,13 +9,18 @@ import { mailtrapFields } from "../mailtrapFields";
 
 const properties: INodeProperties[] = [
   mailtrapFields.accountId,
-  mailtrapFields.idOrEmail,
+  {
+    ...mailtrapFields.email,
+    required: true,
+  },
+  mailtrapFields.fields,
+  mailtrapFields.listIds,
 ];
 
 const displayOptions = {
   show: {
     resource: ['contact'],
-    operation: ['delete_'],
+    operation: ['create'],
   },
 };
 
@@ -29,11 +34,15 @@ export async function execute(
   const transport = new MailtrapTransport(this);
 
   const accountId = this.getNodeParameter('accountId', item) as string;
-  const idOrEmail = this.getNodeParameter('idOrEmail', item) as string;
+  const responseData = await transport.request('POST', `/accounts/${accountId}/contacts`, {
+    contact: {
+      email: this.getNodeParameter('email', item) as string,
+      fields: JSON.parse(this.getNodeParameter('fields', item) as string),
+      list_ids: (this.getNodeParameter('listIds', item) as string).split(',').map((id) => parseInt(id.trim())),
+    },
+  });
 
-  const responseData = await transport.request('DELETE', `/accounts/${accountId}/contacts/${idOrEmail}`);
-
-  data.push({ json: { deleted: true }, pairedItem: { item } });
+  data.push({ json: responseData, pairedItem: { item } });
 
   return data;
 }

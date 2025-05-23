@@ -4,7 +4,7 @@ import {
   ICredentialType,
   INodeProperties,
 } from 'n8n-workflow';
-import { mailtrapFields } from "../actions/mailtrapFields";
+import { mailtrapFields } from "../nodes/Mailtrap/actions/mailtrapFields";
 
 export class MailtrapTokenApi implements ICredentialType {
   name = 'MailtrapTokenApi';
