@@ -40,7 +40,7 @@
     "n8nNodesApiVersion": 1,
     "credentials": [
       "dist/credentials/MailtrapBearerTokenApi.credentials.js",
-      "dist/credentials/MailtrapApiTokenApi.credentials.js"
+      "dist/credentials/MailtrapTokenApi.credentials.js"
     ],
     "nodes": [
       "dist/nodes/Mailtrap/Mailtrap.node.js"
