@@ -5,7 +5,7 @@ This is the official Mailtrap.io integration for N8N, allowing you to seamlessly
 ## Prerequisites
 
 Before using this integration, please ensure you have:
-- A [Mailtrap.io](https://mailtrap.io) account
+- A [Mailtrap.io](https://mailtrap.io/signup) account
 - Your sending [domain verified](https://mailtrap.io/sending/domains) in Mailtrap (required for sending emails)
 
 ## Installation
