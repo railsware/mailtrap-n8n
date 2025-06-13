@@ -1,6 +1,38 @@
-# Mailtrap.io N8N Integration
+# Mailtrap.io N8N Integration - Official
 
 This is the official Mailtrap.io integration for N8N, allowing you to seamlessly integrate Mailtrap's email testing and delivery services into your N8N workflows.
+
+## Prerequisites
+
+Before using this integration, please ensure you have:
+- A [Mailtrap.io](https://mailtrap.io/signup) account
+- Your sending [domain verified](https://mailtrap.io/sending/domains) in Mailtrap (required for sending emails)
+
+## Installation
+
+### Community Nodes (Recommended)
+For n8n version 0.187 and later, you can install this node through the Community Nodes panel:
+
+1. Go to Settings > Community Nodes
+2. Select Install
+3. Enter `n8n-nodes-mailtrap` in Enter npm package name
+4. Agree to the risks of using community nodes
+5. Select Install
+
+### Manual Installation
+Alternatively, you can install the node manually using one of these methods:
+
+#### Using npm
+```bash
+npm install n8n-nodes-mailtrap
+```
+
+#### Using pnpm
+```bash
+pnpm add n8n-nodes-mailtrap
+```
+
+For more detailed installation instructions, please refer to the [n8n community nodes documentation](https://docs.n8n.io/integrations/community-nodes/installation/).
 
 ## Features
 
@@ -14,11 +46,12 @@ This integration provides the following capabilities:
   - Update contact information
   - Get a list of your Mailtrap Lists
 
-## Prerequisites
+## Usage
 
-Before using this integration, please ensure you have:
-- A [Mailtrap.io](https://mailtrap.io) account
-- Your sending domain verified in Mailtrap (required for sending emails)
+1. After installation, restart your n8n instance
+2. In your n8n workflow, you'll find the Mailtrap node under the "Mailtrap" category
+3. Configure the node with your [Mailtrap API token](https://mailtrap.io/api-tokens) (you can find it in your Mailtrap account settings)
+4. Use the node to send emails or manage contacts according to your needs
 
 ## Node local development setup
 ### Prerequisites
