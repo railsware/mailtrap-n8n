@@ -21,7 +21,7 @@ export class MailtrapBearerTokenApi implements ICredentialType {
         password: true,
       },
       placeholder: 'Bearer 123456',
-      description: 'The bearer token used to authenticate with Mailtrap',
+      description: 'The bearer token used to authenticate with Mailtrap. Get your token at: https://mailtrap.io/api-tokens',
       hint: 'The "Bearer " prefix is optional',
       default: '',
     },

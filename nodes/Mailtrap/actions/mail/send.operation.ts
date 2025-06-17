@@ -9,15 +9,24 @@ import { MailtrapTransport } from "../../transport";
 import { mailtrapFields } from "../mailtrapFields";
 
 const properties: INodeProperties[] = [
-  mailtrapFields.fromName,
   mailtrapFields.fromEmail,
-  mailtrapFields.replyToName,
-  mailtrapFields.replyToEmail,
-  mailtrapFields.toName,
   mailtrapFields.toEmail,
   mailtrapFields.subject,
   mailtrapFields.html,
-]
+  {
+    displayName: 'Additional Fields',
+    name: 'additionalFields',
+    type: 'collection',
+    placeholder: 'Add optional fields',
+    default: {},
+    options: [
+      mailtrapFields.fromName,
+      mailtrapFields.toName,
+      mailtrapFields.replyToName,
+      mailtrapFields.replyToEmail,
+    ],
+  },
+];
 
 const displayOptions = {
   show: {
@@ -35,23 +44,29 @@ export async function execute(
   const data: INodeExecutionData[] = [];
   const transport = new MailtrapTransport(this);
 
+  const fromEmail = this.getNodeParameter('fromEmail', item) as string;
+  const toEmail = this.getNodeParameter('toEmail', item) as string;
+  const subject = this.getNodeParameter('subject', item) as string;
+  const html = this.getNodeParameter('html', item) as string;
+  const additionalFields = this.getNodeParameter('additionalFields', item, {}) as IDataObject;
+
   const sendOptions: IDataObject = {
     from: {
-      name: this.getNodeParameter('fromName', item) as string,
-      email: this.getNodeParameter('fromEmail', item) as string,
+      email: fromEmail,
+      name: additionalFields.fromName as string || undefined,
     },
     to: [{
-      name: this.getNodeParameter('toName', item) as string,
-      email: this.getNodeParameter('toEmail', item) as string,
+      email: toEmail,
+      name: additionalFields.toName as string || undefined,
     }],
-    subject: this.getNodeParameter('subject', item) as string,
-    html: this.getNodeParameter('html', item) as string,
+    subject,
+    html,
   };
 
-  if (this.getNodeParameter('replyToEmail', item)) {
+  if (additionalFields.replyToEmail) {
     sendOptions.reply_to = {
-      name: this.getNodeParameter('replyToName', item) as string,
-      email: this.getNodeParameter('replyToEmail', item) as string,
+      name: additionalFields.replyToName as string || undefined,
+      email: additionalFields.replyToEmail as string,
     };
   }
 
