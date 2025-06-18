@@ -21,8 +21,8 @@ export const description: INodeProperties[] = [
       {
         name: 'Send Email',
         value: 'send',
-        description: 'Sends an email via Mailtrap',
-        action: 'Send an email via mailtrap',
+        description: 'Send an email',
+        action: 'Send an email',
       },
     ],
     default: 'send',

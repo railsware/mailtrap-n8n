@@ -21,7 +21,7 @@ export class MailtrapTokenApi implements ICredentialType {
         password: true,
       },
       placeholder: '123456',
-      description: 'The API token used to authenticate with Mailtrap',
+      description: 'The API token used to authenticate with Mailtrap. Get your token at: https://mailtrap.io/api-tokens',
       default: '',
     },
     mailtrapFields.mailingHost,
