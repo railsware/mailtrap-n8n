@@ -41,7 +41,6 @@ export const description: INodeProperties[] = [
       {
         name: 'Get Contact Lists',
         value: 'getLists',
-        description: 'Get contact lists',
         action: 'Get contact lists',
       },
     ],
