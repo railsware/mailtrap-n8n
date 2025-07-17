@@ -6,12 +6,12 @@
   "resources": {
     "credentialDocumentation": [
       {
-        "url": "https://docs.n8n.io/integrations/builtin/credentials/mailtrap/"
+        "url": "https://help.mailtrap.io/article/103-api-tokens"
       }
     ],
     "primaryDocumentation": [
       {
-        "url": "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.mailtrap/"
+        "url": "https://help.mailtrap.io/article/168-mailtrap-and-n8n"
       }
     ],
     "generic": [
