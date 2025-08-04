@@ -19,6 +19,9 @@ For n8n version 0.187 and later, you can install this node through the Community
 4. Agree to the risks of using community nodes
 5. Select Install
 
+### n8n Cloud
+If you're using [n8n Cloud](https://cloud.n8n.io/), the Mailtrap node is available out of the box. Simply search for "Mailtrap" in the node library when building your workflows.
+
 ### Manual Installation
 Alternatively, you can install the node manually using one of these methods:
 
